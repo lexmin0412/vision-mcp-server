@@ -66,7 +66,7 @@ read_image image=https://example.com/chart.png prompt="描述这张图表的趋�
 | 变量 | 必填 | 默认值 | 说明 |
 |:-----|:----:|:------|:------|
 | `VOLC_API_KEY` | ✅ | — | 火山引擎 API Key |
-| `VISION_MODEL` | ❌ | `doubao-seed-2-0-lite-260428` | 多模态模型名称 |
+| `VISION_MODEL` | ❌ | `doubao-seed-2-0-lite-260428` | 多模态模型 ID。去[模型详情页](https://console.volcengine.com/ark/region:ark+cn-beijing/model/detail?Id=doubao-seed-2-0-lite)获取，URL 中 `Id=` 后面的值即为模型 ID |
 | `VISION_BASE_URL` | ❌ | `https://ark.cn-beijing.volces.com/api/v3/chat/completions` | API 端点 |
 | `VISION_TIMEOUT_MS` | ❌ | `60000` | 请求超时（毫秒） |
 | `VISION_MAX_DIM` | ❌ | `1024` | 本地图片压缩阈值（像素） |
