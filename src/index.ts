@@ -13,6 +13,7 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { readImage as callVolc } from "./providers/volc.js";
 import type { VolcConfig } from "./types.js";
+import pkg from '../package.json' with { type: "json" };
 
 const LOG_DIR = join(homedir(), ".vision-mcp");
 const LOG_FILE = join(LOG_DIR, "vision-mcp.log");
@@ -48,7 +49,7 @@ const config: VolcConfig = {
 await log("INFO", `启动配置: model=${config.model}`);
 
 const server = new Server(
-  { name: "vision-mcp", version: "0.0.1" },
+  { name: "vision-mcp", version: pkg.version },
   { capabilities: { tools: {}, resources: {}, prompts: {} } }
 );
 
