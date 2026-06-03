@@ -8,6 +8,8 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import {
   ListToolsRequestSchema,
   CallToolRequestSchema,
+  ListResourcesRequestSchema,
+  ListPromptsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { readImage as callVolc } from "./providers/volc.js";
 import type { VolcConfig } from "./types.js";
@@ -40,14 +42,19 @@ const config: VolcConfig = {
   baseUrl:
     process.env.VISION_BASE_URL ??
     "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+  timeout: parseInt(process.env.VISION_TIMEOUT_MS ?? "60000", 10),
 };
 
 await log("INFO", `启动配置: model=${config.model}`);
 
 const server = new Server(
   { name: "vision-mcp", version: "0.0.1" },
-  { capabilities: { tools: {} } }
+  { capabilities: { tools: {}, resources: {}, prompts: {} } }
 );
+
+server.setRequestHandler(ListResourcesRequestSchema, async () => ({ resources: [] }));
+
+server.setRequestHandler(ListPromptsRequestSchema, async () => ({ prompts: [] }));
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   await log("DEBUG", "列出工具");
@@ -113,11 +120,12 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
       image,
       stack: err instanceof Error ? err.stack : undefined,
     });
-    throw err;
+    return {
+      content: [{ type: "text" as const, text: `图片理解失败: ${msg}` }],
+      isError: true,
+    };
   }
 });
-
-
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
