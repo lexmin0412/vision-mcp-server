@@ -2,39 +2,6 @@
 
 给纯文本大模型加上视觉能力的 MCP Server。通过调用多模态 API，让 DeepSeek、GLM、Kimi 等纯文本模型也能"看懂"图片。
 
-## 安装
-
-```bash
-npm install -g @lexmin0412/vision-mcp
-# 或
-pnpm add -g @lexmin0412/vision-mcp
-```
-
-或者从源码安装：
-
-```bash
-git clone https://github.com/lexmin0412/vision-mcp-server.git
-cd vision-mcp-server
-pnpm install
-pnpm build
-```
-
-## 配置
-
-设置火山引擎 API Key：
-
-```bash
-export VOLC_API_KEY=你的火山引擎API Key
-```
-
-可选环境变量：
-
-| 变量 | 默认值 | 说明 |
-|:-----|:------|:-----|
-| `VISION_MODEL` | `doubao-seed-2-0-lite-260428` | 多模态模型名称 |
-| `VISION_BASE_URL` | `https://ark.cn-beijing.volces.com/api/v3/chat/completions` | API 端点 |
-| `VISION_TIMEOUT_MS` | `60000` | 请求超时（毫秒） |
-
 ## MCP 配置
 
 ### Claude Desktop
@@ -47,21 +14,6 @@ export VOLC_API_KEY=你的火山引擎API Key
     "@lexmin0412/vision-mcp": {
       "command": "npx",
       "args": ["-y", "@lexmin0412/vision-mcp"],
-      "env": {
-        "VOLC_API_KEY": "你的火山引擎API Key"
-      }
-    }
-  }
-}
-
-或者本地安装路径：
-
-```json
-{
-  "mcpServers": {
-    "vision-mcp": {
-      "command": "node",
-      "args": ["/绝对路径/vision-mcp-server/dist/index.js"],
       "env": {
         "VOLC_API_KEY": "你的火山引擎API Key"
       }
@@ -109,15 +61,15 @@ read_image image=/Users/xxx/截图.png prompt="这个报错信息是什么"
 read_image image=https://example.com/chart.png prompt="描述这张图表的趋势"
 ```
 
-## 配置
+## 环境变量
 
-| 环境变量 | 默认值 | 说明 |
-|:---------|:------|:-----|
-| `VOLC_API_KEY` | — | **必填**。火山引擎 API Key |
-| `VISION_MODEL` | `doubao-seed-2-0-lite` | 多模态模型名称 |
-| `VISION_BASE_URL` | `https://ark.cn-beijing.volces.com/api/v3/chat/completions` | API 端点 |
-| `VISION_TIMEOUT_MS` | `60000` | 请求超时（毫秒） |
-| `VISION_MAX_DIM` | `1024` | 本地图片压缩阈值（像素） |
+| 变量 | 必填 | 默认值 | 说明 |
+|:-----|:----:|:------|:------|
+| `VOLC_API_KEY` | ✅ | — | 火山引擎 API Key |
+| `VISION_MODEL` | ❌ | `doubao-seed-2-0-lite-260428` | 多模态模型名称 |
+| `VISION_BASE_URL` | ❌ | `https://ark.cn-beijing.volces.com/api/v3/chat/completions` | API 端点 |
+| `VISION_TIMEOUT_MS` | ❌ | `60000` | 请求超时（毫秒） |
+| `VISION_MAX_DIM` | ❌ | `1024` | 本地图片压缩阈值（像素） |
 
 ## 工作原理
 
