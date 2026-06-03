@@ -5,8 +5,16 @@
 ## 安装
 
 ```bash
-git clone https://github.com/你的用户名/vision-mcp.git
-cd vision-mcp
+npm install -g @lexmin0412/vision-mcp
+# 或
+pnpm add -g @lexmin0412/vision-mcp
+```
+
+或者从源码安装：
+
+```bash
+git clone https://github.com/lexmin0412/vision-mcp-server.git
+cd vision-mcp-server
 pnpm install
 pnpm build
 ```
@@ -36,9 +44,24 @@ export VOLC_API_KEY=你的火山引擎API Key
 ```json
 {
   "mcpServers": {
+    "@lexmin0412/vision-mcp": {
+      "command": "npx",
+      "args": ["-y", "@lexmin0412/vision-mcp"],
+      "env": {
+        "VOLC_API_KEY": "你的火山引擎API Key"
+      }
+    }
+  }
+}
+
+或者本地安装路径：
+
+```json
+{
+  "mcpServers": {
     "vision-mcp": {
       "command": "node",
-      "args": ["/绝对路径/vision-mcp/dist/index.js"],
+      "args": ["/绝对路径/vision-mcp-server/dist/index.js"],
       "env": {
         "VOLC_API_KEY": "你的火山引擎API Key"
       }
@@ -56,7 +79,7 @@ export VOLC_API_KEY=你的火山引擎API Key
   "mcp": {
     "vision-mcp": {
       "type": "local",
-      "command": ["node", "/绝对路径/vision-mcp/dist/index.js"],
+      "command": ["npx", "-y", "@lexmin0412/vision-mcp"],
       "enabled": true,
       "environment": {
         "VOLC_API_KEY": "你的火山引擎API Key"

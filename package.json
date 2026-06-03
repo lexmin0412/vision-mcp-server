@@ -1,6 +1,9 @@
 {
-  "name": "vision-mcp",
+  "name": "@lexmin0412/vision-mcp",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "图片理解 MCP Server — 给纯文本模型加上视觉能力",
   "type": "module",
   "bin": {
