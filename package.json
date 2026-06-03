@@ -2,7 +2,8 @@
   "name": "@lexmin0412/vision-mcp",
   "version": "0.0.1",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "description": "图片理解 MCP Server — 给纯文本模型加上视觉能力",
   "type": "module",
